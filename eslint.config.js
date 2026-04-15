@@ -23,5 +23,12 @@ export default defineConfig([
         tsconfigRootDir: import.meta.dirname,
       },
     },
+    rules: {
+      "no-unused-vars": ["warn", { varsIgnorePattern: "^[A-Z_]" }],
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { varsIgnorePattern: "^[A-Z_]" },
+      ],
+    },
   },
 ]);

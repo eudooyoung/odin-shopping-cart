@@ -3,20 +3,20 @@ import {
   RouterProvider,
   type DataRouter,
 } from "react-router";
-import { beforeEach, describe, it } from "vitest";
-import routes from "./routes/routes";
-import userEvent from "@testing-library/user-event";
+import { beforeEach, describe, expect, it } from "vitest";
+import routes from "../../routes/routes";
 import { render, screen } from "@testing-library/react";
 
-describe("App Component", () => {
+describe("Main Component", () => {
   let router: DataRouter;
 
   beforeEach(() => {
     router = createBrowserRouter(routes);
   });
 
-  it("change main heading with navigation bar links", async () => {
-    const user = userEvent.setup();
+  it("initial heading", () => {
     render(<RouterProvider router={router} />);
+    const mainHeading = screen.getByText("Home Page");
+    expect(mainHeading).toBeInTheDocument();
   });
 });

@@ -17,9 +17,11 @@
     │       └── SomeRoute.module.css
     ├── utils
     │   └── setup.ts
+    ├── assets
+    │   └── SomeAssets....
     ├── App.tsx
     ├── App.test.tsx
     ├── App.module.css
     └── main.tsx
-
+    
 ```

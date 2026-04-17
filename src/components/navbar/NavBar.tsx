@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 
-export default function Navbar() {
+export default function NavBar() {
   return (
     <>
       <Link to="/">Home</Link>

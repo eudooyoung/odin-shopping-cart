@@ -1,17 +1,12 @@
 import {
   createBrowserRouter,
-  MemoryRouter,
-  Route,
   RouterProvider,
-  Routes,
   type DataRouter,
 } from "react-router";
 import { beforeEach, describe, expect, it, vi, type Mock } from "vitest";
 import routes from "./utils/routes";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
-import App from "./App";
-import Shop from "./routes/shop/Shop";
 
 describe("App Component", () => {
   let router: DataRouter;
@@ -20,8 +15,8 @@ describe("App Component", () => {
 
     window.fetch = vi.fn(() => {
       const productItems = [
-        { id: 1, name: "productOne" },
-        { id: 2, name: "productTwo" },
+        { id: 1, title: "productOne" },
+        { id: 2, title: "productTwo" },
       ];
 
       return Promise.resolve({
@@ -78,22 +73,17 @@ describe("App Component", () => {
       expect(mainHeading.textContent).toEqual("Home Page");
     });
 
-    it("display product items with fetched data", () => {
-      render(
-        <MemoryRouter initialEntries={["/link"]}>
-          <Routes>
-            <Route path="/" element={<App />}>
-              <Route path="shop" element={<Shop />} />
-            </Route>
-          </Routes>
-        </MemoryRouter>,
-      );
+    it("display product items with fetched data", async () => {
+      const user = userEvent.setup();
+      render(<RouterProvider router={router} />);
 
+      await user.click(screen.getByRole("link", { name: "Cart" }));
       const productOneTitle = screen.getByRole("heading", {
         level: 3,
         name: "productOne",
       });
       expect(productOneTitle).toBeInTheDocument();
+      screen.debug();
     });
   });
 });

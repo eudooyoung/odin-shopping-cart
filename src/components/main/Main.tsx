@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { Outlet } from "react-router";
+import type { ProductItem } from "../../utils/type";
 
 export default function Main() {
   const { productItems, shopError, shopLoading } = useFakeStore();
@@ -13,7 +14,8 @@ export default function Main() {
 }
 
 function useFakeStore() {
-  const [productItems, setProductItems] = useState<Array<JSON> | null>(null);
+
+  const [productItems, setProductItems] = useState<ProductItem[] | null>(null);
   const [shopError, setShopError] = useState<Error | null>(null);
   const [shopLoading, setShopLoading] = useState(true);
 
@@ -25,7 +27,7 @@ function useFakeStore() {
         }
         return response.json();
       })
-      .then((response: Array<JSON>) => setProductItems(response))
+      .then((response: ProductItem[]) => setProductItems(response))
       .catch((error: Error) => setShopError(error))
       .finally(() => setShopLoading(false));
   }, []);

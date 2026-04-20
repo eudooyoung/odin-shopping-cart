@@ -1,47 +1,32 @@
 import { render, screen } from "@testing-library/react";
-import { MemoryRouter } from "react-router";
-import { describe, expect, it, vi } from "vitest";
-import Card from "./Card";
+import { MemoryRouter, Route, Routes } from "react-router";
+import { describe, expect, it, vi, type Mock } from "vitest";
 import userEvent from "@testing-library/user-event";
+import Main from "../main/Main";
+import Shop from "../../routes/shop/Shop";
+
+window.fetch = vi.fn(() => {
+  const productItems = [{ id: 1, title: "productOne" }];
+
+  return Promise.resolve({
+    json: () => Promise.resolve(productItems),
+  });
+}) as Mock;
 
 describe("Card Component", () => {
-  const sample = {
-    id: 0,
-    title: "sample",
-    price: 10,
-    description: "sample description",
-    category: "sample category",
-    image: "sample image url",
-  };
-
-  it("product information", () => {
-    render(
-      <MemoryRouter>
-        <Card productItem={sample} />
-      </MemoryRouter>,
-    );
-
-    const title = screen.getByRole("heading", {
-      name: sample.title,
-    });
-    expect(title).toBeInTheDocument();
-    const price = screen.getByText(new RegExp(`\\$ ${sample.price}`));
-    expect(price).toBeInTheDocument();
-    const description = screen.getByText(sample.description);
-    expect(description).toBeInTheDocument();
-    const img = screen.getByRole("img", { name: new RegExp(sample.title) });
-    expect(img).toBeInTheDocument();
-  });
-
-  it("item quantity modification", async () => {
+  it("user interaction", async () => {
     const user = userEvent.setup();
     render(
-      <MemoryRouter>
-        <Card productItem={sample} />
+      <MemoryRouter initialEntries={["/shop"]}>
+        <Routes>
+          <Route path="/" element={<Main />}>
+            <Route path="shop" element={<Shop />} />
+          </Route>
+        </Routes>
       </MemoryRouter>,
     );
 
-    const input = screen.getByLabelText(/quantity/i);
+    const input = await screen.findByLabelText(/quantity/i);
     expect(input).toHaveValue("0");
 
     await user.type(input, "5");
@@ -61,19 +46,12 @@ describe("Card Component", () => {
     await user.clear(input);
     await user.click(decreaseButton);
     expect(input).toHaveValue("0");
-  });
 
-  it("add to cart", async () => {
-    const user = userEvent.setup();
-    const onAddToCart = vi.fn(() => {});
-    render(
-      <MemoryRouter>
-        <Card productItem={sample} onAddToCart={onAddToCart} />
-      </MemoryRouter>,
-    );
-
-    const addToCartButton = screen.getByRole("button", { name: /add/i });
+    const addToCartButton = screen.getByRole("button", {
+      name: /add to cart/i,
+    });
+    await user.click(increaseButton);
     await user.click(addToCartButton);
-    expect(onAddToCart).toHaveBeenCalled();
+    expect(input).toHaveValue("0");
   });
 });

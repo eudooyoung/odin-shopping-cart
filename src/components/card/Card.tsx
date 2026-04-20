@@ -1,14 +1,10 @@
 import { useState, type ChangeEvent, type MouseEvent } from "react";
-import type { ProductItem } from "../../utils/type";
+import type { Card, ShopContext } from "../../utils/types";
 import styles from "./Card.module.css";
+import { useOutletContext } from "react-router";
 
-export default function Card({
-  productItem,
-  onAddToCart,
-}: {
-  productItem: ProductItem;
-  onAddToCart: VoidFunction;
-}) {
+export default function Card({ productItem }: Card) {
+  const [_, setCartItems] = useOutletContext<ShopContext>();
   const [quantity, setQuantity] = useState(0);
 
   const inputHandle = (e: ChangeEvent<HTMLInputElement>) => {
@@ -34,6 +30,29 @@ export default function Card({
       return;
     }
     setQuantity((quantity) => quantity - 1);
+  };
+
+  const onAddToCart = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (quantity === 0) {
+      return;
+    }
+    setQuantity(0);
+    setCartItems((prevCart) => {
+      const newCart = new Map(prevCart);
+      if (!newCart.has(productItem.id)) {
+        newCart.set(productItem.id, {
+          id: productItem.id,
+          title: productItem.title,
+          price: productItem.price,
+          quantity: quantity,
+        });
+        return newCart;
+      }
+      const cartItem = newCart.get(productItem.id);
+      cartItem!.quantity += quantity;
+      return newCart;
+    });
   };
 
   return (

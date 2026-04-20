@@ -1,11 +1,10 @@
+import { useEffect, useState } from "react";
 import Card from "../../components/card/Card";
-import type { ProductItem } from "../../utils/type";
+import type {  ProductItem } from "../../utils/types";
 import styles from "./Shop.module.css";
-import { useOutletContext } from "react-router";
 
 export default function Shop() {
-  const [productItems, shopError, shopLoading] =
-    useOutletContext<[ProductItem[], Error, boolean]>();
+  const { productItems, shopError, shopLoading } = useFakeStore();
 
   return (
     <>
@@ -17,4 +16,25 @@ export default function Shop() {
       </div>
     </>
   );
+}
+
+function useFakeStore() {
+  const [productItems, setProductItems] = useState<ProductItem[]>([]);
+  const [shopError, setShopError] = useState<Error | null>(null);
+  const [shopLoading, setShopLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products")
+      .then((response) => {
+        if (response.status >= 400) {
+          throw new Error("server error");
+        }
+        return response.json();
+      })
+      .then((response: ProductItem[]) => setProductItems(response))
+      .catch((error: Error) => setShopError(error))
+      .finally(() => setShopLoading(false));
+  }, []);
+
+  return { productItems, shopError, shopLoading };
 }

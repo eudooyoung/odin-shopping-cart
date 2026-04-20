@@ -7,7 +7,7 @@ describe("NavBar Component", () => {
   it("links", () => {
     render(
       <MemoryRouter>
-        <NavBar />
+        <NavBar totalItems={0} />
       </MemoryRouter>,
     );
 

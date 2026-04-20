@@ -35,11 +35,11 @@ describe("Card Component", () => {
     await user.type(input, "Words");
     expect(input).toHaveValue("5");
 
-    const increaseButton = screen.getByRole("button", { name: "+1" });
+    const increaseButton = screen.getByRole("button", { name: "+" });
     await user.click(increaseButton);
     expect(input).toHaveValue("6");
 
-    const decreaseButton = screen.getByRole("button", { name: "-1" });
+    const decreaseButton = screen.getByRole("button", { name: "-" });
     await user.click(decreaseButton);
     expect(input).toHaveValue("5");
 

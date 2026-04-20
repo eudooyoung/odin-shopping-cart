@@ -1,10 +1,10 @@
 import { useState, type ChangeEvent, type MouseEvent } from "react";
-import type { Card, ShopContext } from "../../utils/types";
+import type { Card, MainContext } from "../../utils/types";
 import styles from "./Card.module.css";
 import { useOutletContext } from "react-router";
 
 export default function Card({ productItem }: Card) {
-  const [_, setCartItems] = useOutletContext<ShopContext>();
+  const [_, setCartItems] = useOutletContext<MainContext>();
   const [quantity, setQuantity] = useState(0);
 
   const inputHandle = (e: ChangeEvent<HTMLInputElement>) => {
@@ -45,6 +45,7 @@ export default function Card({ productItem }: Card) {
           id: productItem.id,
           title: productItem.title,
           price: productItem.price,
+          image: productItem.image,
           quantity: quantity,
         });
         return newCart;
@@ -72,8 +73,8 @@ export default function Card({ productItem }: Card) {
           value={quantity}
           onChange={inputHandle}
         />
-        <button onClick={handleIncrease}>+1</button>
-        <button onClick={handleDecrease}>-1</button>
+        <button onClick={handleIncrease}>+</button>
+        <button onClick={handleDecrease}>-</button>
         <button onClick={onAddToCart}>Add to cart</button>
       </form>
     </div>

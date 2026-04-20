@@ -5,11 +5,11 @@ import type { CartItem } from "../../utils/types";
 
 export default function Main() {
   const [cartItems, setCartItems] = useState(new Map<number, CartItem>());
-  const totalItems = cartItems.size;
+  const totalItem = cartItems.size;
 
   return (
     <>
-      <NavBar totalItems={totalItems} />
+      <NavBar totalItem={totalItem} />
       <Outlet context={[cartItems, setCartItems]} />
     </>
   );

@@ -30,59 +30,63 @@ describe("Main Component", () => {
     router = createBrowserRouter(routes);
   });
 
-  it("initial page to be home", () => {
-    render(<RouterProvider router={router} />);
-    const mainHeading = screen.getByRole("heading", { level: 2 });
-    expect(mainHeading.textContent).toMatch(/Home/);
+  describe("Home Route", () => {
+    it("initial page to be home", () => {
+      render(<RouterProvider router={router} />);
+      const mainHeading = screen.getByRole("heading", { level: 2 });
+      expect(mainHeading.textContent).toMatch(/Home/);
+    });
   });
 
-  it("shop page fetch product items", async () => {
-    render(
-      <MemoryRouter initialEntries={["/shop"]}>
-        <Routes>
-          <Route path="/" element={<Main />}>
-            <Route path="shop" element={<Shop />} />
-          </Route>
-        </Routes>
-      </MemoryRouter>,
-    );
+  describe("Shop Route", () => {
+    it("shop page fetch product items", async () => {
+      render(
+        <MemoryRouter initialEntries={["/shop"]}>
+          <Routes>
+            <Route path="/" element={<Main />}>
+              <Route path="shop" element={<Shop />} />
+            </Route>
+          </Routes>
+        </MemoryRouter>,
+      );
 
-    const productOneTitle = await screen.findByRole("heading", {
-      level: 3,
-      name: "productOne",
+      const productOneTitle = await screen.findByRole("heading", {
+        level: 3,
+        name: "productOne",
+      });
+      expect(productOneTitle).toBeInTheDocument();
+      const productTwoTitle = screen.getByRole("heading", {
+        level: 3,
+        name: "productTwo",
+      });
+      expect(productTwoTitle).toBeInTheDocument();
     });
-    expect(productOneTitle).toBeInTheDocument();
-    const productTwoTitle = await screen.findByRole("heading", {
-      level: 3,
-      name: "productTwo",
+
+    it("display how many items in cart on navbar", async () => {
+      const user = userEvent.setup();
+      render(
+        <MemoryRouter initialEntries={["/shop"]}>
+          <Routes>
+            <Route path="/" element={<Main />}>
+              <Route path="shop" element={<Shop />} />
+            </Route>
+          </Routes>
+        </MemoryRouter>,
+      );
+
+      const cartPageLink = screen.getByRole("link", { name: /cart/i });
+      expect(cartPageLink).not.toHaveTextContent(/0/);
+
+      const addToCartBtns = await screen.findAllByRole("button", {
+        name: /add to cart/i,
+      });
+      await user.click(addToCartBtns[0]);
+      expect(cartPageLink).not.toHaveTextContent(/1/);
+
+      const increaseBtns = screen.getAllByRole("button", { name: "+" });
+      await user.click(increaseBtns[0]);
+      await user.click(addToCartBtns[0]);
+      expect(cartPageLink).toHaveTextContent(/1/);
     });
-    expect(productTwoTitle).toBeInTheDocument();
-  });
-
-  it("display how many items in cart on navbar", async () => {
-    const user = userEvent.setup();
-    render(
-      <MemoryRouter initialEntries={["/shop"]}>
-        <Routes>
-          <Route path="/" element={<Main />}>
-            <Route path="shop" element={<Shop />} />
-          </Route>
-        </Routes>
-      </MemoryRouter>,
-    );
-
-    const cartPageLink = screen.getByRole("link", { name: /cart/i });
-    expect(cartPageLink).not.toHaveTextContent(/0/);
-
-    const addToCartBtns = await screen.findAllByRole("button", {
-      name: /add to cart/i,
-    });
-    await user.click(addToCartBtns[0]);
-    expect(cartPageLink).not.toHaveTextContent(/1/);
-
-    const increaseBtns = await screen.findAllByRole("button", { name: "+1" });
-    await user.click(increaseBtns[0]);
-    await user.click(addToCartBtns[0]);
-    expect(cartPageLink).toHaveTextContent(/1/);
   });
 });

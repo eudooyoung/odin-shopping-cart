@@ -8,7 +8,11 @@ import {
 } from "react-router";
 import { beforeEach, describe, expect, it, vi, type Mock } from "vitest";
 import routes from "../../utils/routes";
-import { render, screen } from "@testing-library/react";
+import {
+  render,
+  screen,
+  waitForElementToBeRemoved,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Shop from "../../routes/shop/Shop";
 import Main from "./Main";
@@ -87,6 +91,41 @@ describe("Main Component", () => {
       await user.click(increaseBtns[0]);
       await user.click(addToCartBtns[0]);
       expect(cartPageLink).toHaveTextContent(/1/);
+    });
+
+    it("loading page", async () => {
+      render(
+        <MemoryRouter initialEntries={["/shop"]}>
+          <Routes>
+            <Route path="/" element={<Main />}>
+              <Route path="shop" element={<Shop />} />
+            </Route>
+          </Routes>
+        </MemoryRouter>,
+      );
+
+      const loading = screen.getByText(/loading/i);
+      expect(loading).toBeInTheDocument();
+      await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
+    });
+
+    it("error page", async () => {
+      vi.mocked(window).fetch.mockImplementationOnce(() => {
+        return Promise.reject(new Error("API is down"));
+      });
+
+      render(
+        <MemoryRouter initialEntries={["/shop"]}>
+          <Routes>
+            <Route path="/" element={<Main />}>
+              <Route path="shop" element={<Shop />} />
+            </Route>
+          </Routes>
+        </MemoryRouter>,
+      );
+
+      const errorMessage = await screen.findByText("API is down");
+      expect(errorMessage).toBeInTheDocument();
     });
   });
 });

@@ -9,6 +9,8 @@ export default function Shop() {
   return (
     <>
       <h2>Shop Page</h2>
+      {shopLoading && <span>Loading...</span>}
+      {shopError && <span>{shopError.message}</span>}
       <div className={styles.cardContainer}>
         {productItems.map((productItem) => (
           <Card key={productItem.id} productItem={productItem} />

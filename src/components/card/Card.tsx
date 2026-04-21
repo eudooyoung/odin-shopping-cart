@@ -39,7 +39,7 @@ export default function Card({ productItem }: Card) {
     }
     setQuantity(0);
     setCartItems((prevCart) => {
-      const newCart = new Map(prevCart);
+      const newCart = structuredClone(prevCart);
       if (!newCart.has(productItem.id)) {
         newCart.set(productItem.id, {
           id: productItem.id,

@@ -9,7 +9,7 @@ export default function Order({ cartItem }: Order) {
   const handleIncrease = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setCartItems((prevCart) => {
-      const newCart = new Map(prevCart);
+      const newCart = structuredClone(prevCart);
       newCart.get(cartItem.id)!.quantity += 1;
       return newCart;
     });
@@ -21,7 +21,7 @@ export default function Order({ cartItem }: Order) {
       return;
     }
     setCartItems((prevCart) => {
-      const newCart = new Map(prevCart);
+      const newCart = structuredClone(prevCart);
       newCart.get(cartItem.id)!.quantity -= 1;
       return newCart;
     });

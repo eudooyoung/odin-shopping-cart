@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Card from "../../components/card/Card";
-import type {  ProductItem } from "../../utils/types";
+import type { ProductItem } from "../../utils/types";
 import styles from "./Shop.module.css";
 
 export default function Shop() {
@@ -24,6 +24,7 @@ function useFakeStore() {
   const [shopLoading, setShopLoading] = useState(true);
 
   useEffect(() => {
+    let ignore = false;
     fetch("https://fakestoreapi.com/products")
       .then((response) => {
         if (response.status >= 400) {
@@ -31,9 +32,25 @@ function useFakeStore() {
         }
         return response.json();
       })
-      .then((response: ProductItem[]) => setProductItems(response))
-      .catch((error: Error) => setShopError(error))
-      .finally(() => setShopLoading(false));
+      .then((response: ProductItem[]) => {
+        if (!ignore) {
+          setProductItems(response);
+        }
+      })
+      .catch((error: Error) => {
+        if (!ignore) {
+          setShopError(error);
+        }
+      })
+      .finally(() => {
+        if (!ignore) {
+          setShopLoading(false);
+        }
+      });
+
+    return () => {
+      ignore = true;
+    };
   }, []);
 
   return { productItems, shopError, shopLoading };

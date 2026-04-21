@@ -3,7 +3,7 @@ import type { MainContext } from "../../utils/types";
 import Order from "../../components/order/Order";
 
 export default function Cart() {
-  const [cartItems, setCartItems] = useOutletContext<MainContext>();
+  const [cartItems, _] = useOutletContext<MainContext>();
   const cartItemsArr = [...cartItems.values()];
 
   return (

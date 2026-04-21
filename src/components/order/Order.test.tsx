@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { MemoryRouter, Outlet, Route, Routes } from "react-router";
+import { MemoryRouter, Route, Routes } from "react-router";
 import { describe, expect, it, vi, type Mock } from "vitest";
 import Cart from "../../routes/cart/Cart";
 import Main from "../main/Main";
@@ -29,7 +29,7 @@ describe("Order Component", () => {
     );
 
     const quantityInput = await screen.findByLabelText(/quantity/i);
-    await user.type(quantityInput, "5");
+    await user.type(quantityInput, "1");
     const addToCartBtn = screen.getByRole("button", { name: /cart/i });
     await user.click(addToCartBtn);
     const linkToCartPage = screen.getByRole("link", { name: /cart/i });
@@ -38,10 +38,16 @@ describe("Order Component", () => {
     const increaseOrderBtn = screen.getByRole("button", { name: "+" });
     await user.click(increaseOrderBtn);
     const orderQuantity = screen.getByLabelText(/quantity/i);
-    expect(orderQuantity).toHaveValue("6");
+    expect(orderQuantity).toHaveValue("2");
 
-    const decreaseOrderBtn = screen.getByRole("button", {name: "-"});
+    const decreaseOrderBtn = screen.getByRole("button", { name: "-" });
     await user.click(decreaseOrderBtn);
-    expect(orderQuantity).toHaveValue("5");
+    expect(orderQuantity).toHaveValue("1");
+    await user.click(decreaseOrderBtn);
+    expect(orderQuantity).toHaveValue("1");
+
+    const deleteOrderBtn = screen.getByRole("button", { name: "x" });
+    await user.click(deleteOrderBtn);
+    expect(screen.queryByRole("heading", { name: "productOne" })).toBeNull();
   });
 });

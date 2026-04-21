@@ -1,7 +1,7 @@
 import styles from "./Order.module.css";
 import type { MainContext, Order } from "../../utils/types";
 import { useOutletContext } from "react-router";
-import type { MouseEvent } from "react";
+import type {  MouseEvent } from "react";
 
 export default function Order({ cartItem }: Order) {
   const [_, setCartItems] = useOutletContext<MainContext>();
@@ -17,12 +17,21 @@ export default function Order({ cartItem }: Order) {
 
   const handleDecrease = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (cartItem.quantity < 1) {
+    if (cartItem.quantity === 1) {
       return;
     }
     setCartItems((prevCart) => {
       const newCart = structuredClone(prevCart);
       newCart.get(cartItem.id)!.quantity -= 1;
+      return newCart;
+    });
+  };
+
+  const handleDelete = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setCartItems((prevCart) => {
+      const newCart = structuredClone(prevCart);
+      newCart.delete(cartItem.id);
       return newCart;
     });
   };
@@ -43,11 +52,11 @@ export default function Order({ cartItem }: Order) {
           id="quantity"
           itemType="number"
           value={cartItem.quantity}
-          // onChange={inputHandle}
+          readOnly={true}
         />
         <button onClick={handleIncrease}>+</button>
         <button onClick={handleDecrease}>-</button>
-        {/* <button onClick={onAddToCart}>Add to cart</button> */}
+        <button onClick={handleDelete}>x</button>
       </form>
     </div>
   );

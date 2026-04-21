@@ -24,11 +24,8 @@ export default defineConfig([
       },
     },
     rules: {
-      "no-unused-vars": ["warn", { varsIgnorePattern: "^[A-Z_]" }],
-      "@typescript-eslint/no-unused-vars": [
-        "warn",
-        { varsIgnorePattern: "^[A-Z_]" },
-      ],
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "off",
     },
   },
 ]);

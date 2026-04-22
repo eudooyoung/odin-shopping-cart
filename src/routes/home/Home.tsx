@@ -1,10 +1,16 @@
+import styles from "./Home.module.css";
+
 export default function Home() {
   return (
-    <>
-      <h2>Home Page</h2>
-      <p>
-        <i>We know you want it! Don't hesitate it. Just get what you desire!</i>
-      </p>
+    <section className={styles.home}>
+      <header>
+        <h2>Home Page</h2>
+        <p>
+          <i>
+            We know you want it! Don't hesitate it. Just get what you desire!
+          </i>
+        </p>
+      </header>
       <section>
         <h3>What we provide</h3>
         <p>
@@ -27,6 +33,6 @@ export default function Home() {
           meet.
         </p>
       </section>
-    </>
+    </section>
   );
 }

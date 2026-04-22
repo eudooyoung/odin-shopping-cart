@@ -28,6 +28,10 @@ window.fetch = vi.fn(() => {
   });
 }) as Mock;
 
+vi.mock("@mdi/react", () => ({
+  Icon: () => <div data-testid="cart"></div>,
+}));
+
 describe("Main Component", () => {
   let router: DataRouter;
   beforeEach(() => {
@@ -87,7 +91,7 @@ describe("Main Component", () => {
       await user.click(addToCartBtns[0]);
       expect(cartPageLink).not.toHaveTextContent(/1/);
 
-      const increaseBtns = screen.getAllByRole("button", { name: "+" });
+      const increaseBtns = screen.getAllByRole("button", { name: /plus/i });
       await user.click(increaseBtns[0]);
       await user.click(addToCartBtns[0]);
       expect(cartPageLink).toHaveTextContent(/1/);

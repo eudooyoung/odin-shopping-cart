@@ -1,3 +1,4 @@
+import "./Main.css";
 import { Outlet } from "react-router";
 import NavBar from "../navbar/NavBar";
 import { useState } from "react";
@@ -8,9 +9,9 @@ export default function Main() {
   const totalItem = cartItems.size;
 
   return (
-    <>
+    <main>
       <NavBar totalItem={totalItem} />
       <Outlet context={[cartItems, setCartItems]} />
-    </>
+    </main>
   );
 }

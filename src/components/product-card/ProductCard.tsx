@@ -1,9 +1,11 @@
+import { Icon } from "@mdi/react";
+import { mdiCartPlus, mdiMinusBox, mdiPlusBox } from "@mdi/js";
 import { useState, type ChangeEvent, type MouseEvent } from "react";
-import type { Card, MainContext } from "../../utils/types";
-import styles from "./Card.module.css";
+import type { ProductCard, MainContext } from "../../utils/types";
+import styles from "./ProductCard.module.css";
 import { useOutletContext } from "react-router";
 
-export default function Card({ productItem }: Card) {
+export default function ProductCard({ productItem }: ProductCard) {
   const [_, setCartItems] = useOutletContext<MainContext>();
   const [quantity, setQuantity] = useState(0);
 
@@ -57,26 +59,37 @@ export default function Card({ productItem }: Card) {
   };
 
   return (
-    <div className={styles.card}>
-      <div className={styles.imageWrapper}>
-        <img src={productItem.image} alt={`image of ${productItem.title}`} />
-      </div>
-      <h3>{productItem.title}</h3>
+    <article className={styles.card}>
+      <img
+        className={styles.img}
+        src={productItem.image}
+        alt={`image of ${productItem.title}`}
+      />
+      <h3 className={styles.h3}>{productItem.title}</h3>
       <span className={styles.productPrice}>$ {productItem.price}</span>
-      <p className={styles.productDescription}>{productItem.description}</p>
-      <form action="post">
+      <form className={styles.form} action="post">
         <label htmlFor="quantity">Quantity: </label>
         <input
+          className={styles.input}
           type="text"
           id="quantity"
           itemType="number"
           value={quantity}
           onChange={inputHandle}
         />
-        <button onClick={handleIncrease}>+</button>
-        <button onClick={handleDecrease}>-</button>
-        <button onClick={onAddToCart}>Add to cart</button>
+        <button className={styles.button} onClick={handleIncrease}>
+          <Icon path={mdiPlusBox} size={1} />
+          <span className={styles.visuallyHidden}>Plus one</span>
+        </button>
+        <button className={styles.button} onClick={handleDecrease}>
+          <Icon path={mdiMinusBox} size={1} />
+          <span className={styles.visuallyHidden}>Minus one</span>
+        </button>
+        <button className={styles.button} onClick={onAddToCart}>
+          <Icon path={mdiCartPlus} size={1} />
+          <span className={styles.visuallyHidden}>Add to cart</span>
+        </button>
       </form>
-    </div>
+    </article>
   );
 }

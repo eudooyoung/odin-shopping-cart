@@ -13,8 +13,20 @@ window.fetch = vi.fn(() => {
   });
 }) as Mock;
 
+/* 
+in case of mocking mdi...
+vi.mock("@mdi/react", () => ({
+  Icon: ({ path }: { path: string }) => {
+    return <div data-testid={path}></div>;
+  },
+}));
+
+vi.mock("@mdi/js", () => ({
+  mdiCartPlus: "cart",
+})); */
+
 describe("Card Component", () => {
-  it("user interaction", async () => {
+  it.only("user interaction", async () => {
     const user = userEvent.setup();
     render(
       <MemoryRouter initialEntries={["/shop"]}>
@@ -35,11 +47,11 @@ describe("Card Component", () => {
     await user.type(input, "Words");
     expect(input).toHaveValue("5");
 
-    const increaseButton = screen.getByRole("button", { name: "+" });
+    const increaseButton = screen.getByRole("button", { name: /plus/i });
     await user.click(increaseButton);
     expect(input).toHaveValue("6");
 
-    const decreaseButton = screen.getByRole("button", { name: "-" });
+    const decreaseButton = screen.getByRole("button", { name: /minus/i });
     await user.click(decreaseButton);
     expect(input).toHaveValue("5");
 
@@ -47,9 +59,7 @@ describe("Card Component", () => {
     await user.click(decreaseButton);
     expect(input).toHaveValue("0");
 
-    const addToCartButton = screen.getByRole("button", {
-      name: /add to cart/i,
-    });
+    const addToCartButton = screen.getByRole("button", { name: /cart/i });
     await user.click(increaseButton);
     await user.click(addToCartButton);
     expect(input).toHaveValue("0");

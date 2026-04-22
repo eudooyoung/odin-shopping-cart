@@ -14,6 +14,10 @@ window.fetch = vi.fn(() => {
   });
 }) as Mock;
 
+vi.mock("@mdi/react", () => ({
+  Icon: () => <div role="img" aria-description="add to cart"></div>,
+}));
+
 describe("Order Component", () => {
   it("user interaction", async () => {
     const user = userEvent.setup();

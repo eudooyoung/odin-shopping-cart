@@ -1,0 +1,16 @@
+.home {
+  text-align: left;
+  display: grid;
+  grid-template-rows: 5em repeat(2, auto);
+}
+
+.home > * {
+  margin: var(--main-content-margin);
+  display: grid;
+  align-items: center;
+}
+
+p {
+  padding: 0 2rem;
+  align-self: start;
+}

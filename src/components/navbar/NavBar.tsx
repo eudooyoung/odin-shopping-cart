@@ -1,13 +1,18 @@
-import { Link } from "react-router";
+import "./NavBar.css";
+import { NavLink } from "react-router";
 
 export default function NavBar({ totalItem }: { totalItem: number }) {
   return (
-    <>
-      <Link to="/">Home</Link>
-      <Link to="/shop">Shop</Link>
-      <Link to="/cart">
-        Cart <span>{totalItem > 0 && totalItem}</span>
-      </Link>
-    </>
+    <nav>
+      <NavLink to="/">
+        <span>Home</span>
+      </NavLink>
+      <NavLink to="/shop">
+        <span>Shop</span>
+      </NavLink>
+      <NavLink to="/cart">
+        <span>Cart {totalItem > 0 && totalItem}</span>
+      </NavLink>
+    </nav>
   );
 }

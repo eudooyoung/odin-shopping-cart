@@ -1,7 +1,7 @@
 import styles from "./Order.module.css";
 import type { MainContext, Order } from "../../utils/types";
 import { useOutletContext } from "react-router";
-import type {  MouseEvent } from "react";
+import type { MouseEvent } from "react";
 
 export default function Order({ cartItem }: Order) {
   const [_, setCartItems] = useOutletContext<MainContext>();
@@ -38,14 +38,13 @@ export default function Order({ cartItem }: Order) {
 
   return (
     <div className={styles.order}>
-      <div className={styles.imageWrapper}>
-        <img src={cartItem.image} alt={`image of ${cartItem.title}`} />
-      </div>
-      <h3>{cartItem.title}</h3>
-      <span className={styles.cartItemTotalPrice}>
-        $ {cartItem.price * cartItem.quantity}
-      </span>
-      <form action="post">
+      <img
+        className={styles.img}
+        src={cartItem.image}
+        alt={`image of ${cartItem.title}`}
+      />
+      <h3 className={styles.h3}>{cartItem.title}</h3>
+      <form className={styles.form} action="post">
         <label htmlFor="quantity">Quantity: </label>
         <input
           type="text"
@@ -58,6 +57,9 @@ export default function Order({ cartItem }: Order) {
         <button onClick={handleDecrease}>-</button>
         <button onClick={handleDelete}>x</button>
       </form>
+      <span className={styles.subTotal}>
+        Sub Total: $ {cartItem.price * cartItem.quantity}
+      </span>
     </div>
   );
 }

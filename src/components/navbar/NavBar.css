@@ -1,0 +1,62 @@
+nav {
+  background-color: var(--navbar-background-color);
+
+  display: flex;
+}
+
+a {
+  flex: 1 1 0;
+  color: var(--navbar-text-color);
+  text-decoration: none;
+
+  display: grid;
+  place-content: center;
+}
+
+a.active {
+  background-color: #fff;
+  font-weight: var(--active-link-font-weight);
+}
+
+/* transition */
+a {
+  transition-property: background-color font-weight;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+
+a:hover {
+  transition-property: background-color font-weight;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  background-color: #fff;
+  font-weight: var(--active-link-font-weight);
+}
+
+/* 
+underline hovering effect
+span {
+  position: relative;
+}
+
+span::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: var(--navbar-text-color);
+  transition-property: transform;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-in-out;
+  transform: scaleX(0);
+}
+
+a:hover span::after {
+  transform: scaleX(1);
+  transition-property: transform;
+  transition-duration: 0.15s;
+  transition-timing-function: ease-in-out;
+}
+ */

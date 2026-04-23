@@ -10,6 +10,7 @@ window.fetch = vi.fn(() => {
   const productItems = [{ id: 1, title: "productOne" }];
 
   return Promise.resolve({
+    ok: true,
     json: () => Promise.resolve(productItems),
   });
 }) as Mock;
@@ -18,7 +19,7 @@ vi.mock("@mdi/react", () => ({
   Icon: () => <div role="img" aria-description="add to cart"></div>,
 }));
 
-describe("Order Component", () => {
+describe("OrderCard Component", () => {
   it("user interaction", async () => {
     const user = userEvent.setup();
     render(

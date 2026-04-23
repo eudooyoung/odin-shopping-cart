@@ -24,6 +24,7 @@ window.fetch = vi.fn(() => {
   ];
 
   return Promise.resolve({
+    ok: true,
     json: () => Promise.resolve(productItems),
   });
 }) as Mock;

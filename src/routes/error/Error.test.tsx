@@ -16,7 +16,6 @@ describe("Error Page", () => {
 
   it("display error page with unknown address", () => {
     render(<RouterProvider router={router} />);
-    screen.debug();
 
     const heading = screen.getByRole("heading", { level: 2 });
     expect(heading.textContent).toMatch(/doesn't exist/i);

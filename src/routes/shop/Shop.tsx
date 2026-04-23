@@ -28,8 +28,38 @@ function useFakeStore() {
   const [shopLoading, setShopLoading] = useState(true);
 
   useEffect(() => {
-    let ignore = false;
-    fetch("https://fakestoreapi.com/products")
+    const controller = new AbortController();
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://fakestoreapi.com/products", {
+          signal: controller.signal,
+        });
+
+        if (!response.ok) {
+          throw new Error(`Server Error: ${response.status}`);
+        }
+
+        const productItems = (await response.json()) as ProductItem[];
+        setProductItems(productItems);
+        
+      } catch (error) {
+        if (error instanceof Error) {
+          if (error.name === "AbortError") {
+            return;
+          }
+          setShopError(error);
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setShopLoading(false);
+        }
+      }
+    };
+
+    void fetchData();
+
+    /* fetch("https://fakestoreapi.com/products", { signal: controller.signal })
       .then((response) => {
         if (response.status >= 400) {
           throw new Error("server error");
@@ -37,23 +67,20 @@ function useFakeStore() {
         return response.json();
       })
       .then((response: ProductItem[]) => {
-        if (!ignore) {
-          setProductItems(response);
-        }
+        setProductItems(response);
       })
       .catch((error: Error) => {
-        if (!ignore) {
-          setShopError(error);
+        if (error.name === "AbortError") {
+          return;
         }
+        setShopError(error);
       })
       .finally(() => {
-        if (!ignore) {
-          setShopLoading(false);
-        }
-      });
+        setShopLoading(false);
+      }); */
 
     return () => {
-      ignore = true;
+      controller.abort();
     };
   }, []);
 

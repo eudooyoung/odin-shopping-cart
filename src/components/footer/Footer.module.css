@@ -1,0 +1,22 @@
+.footer {
+  opacity: 0.8;
+  display: grid;
+  grid-auto-flow: column;
+  place-content: center;
+}
+
+.link {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.link:visited {
+  color: inherit;
+}
+
+@media (max-width: 600px) {
+  .footer{
+    grid-auto-flow: row;
+  }
+}

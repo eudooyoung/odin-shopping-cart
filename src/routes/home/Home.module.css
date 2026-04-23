@@ -1,31 +1,37 @@
-.shop {
+.home {
   text-align: left;
+  padding: 1rem 0;
+
   display: grid;
-  grid-template-rows: 3rem auto;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 5rem;
 }
 
-.shop > * {
+.home > * {
   margin: var(--main-content-margin-wide);
+}
+
+.header,
+.provideSection,
+.aboutSection {
   display: grid;
 }
 
-.header {
-  align-self: center;
-}
-
-.cardContainer {
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+.intro,
+.provide,
+.about {
+  padding: 0 2rem;
+  align-self: start;
 }
 
 @media (max-width: 600px) {
-  .shop > * {
+  .home > * {
     margin: var(--main-content-margin-medium);
   }
 }
 
 @media (max-width: 400px) {
-  .shop > * {
+  .home > * {
     margin: var(--main-content-margin-narrow);
   }
 }

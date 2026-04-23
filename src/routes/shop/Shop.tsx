@@ -1,22 +1,24 @@
-import { useEffect, useState } from "react";
-import Card from "../../components/card/Card";
-import type { ProductItem } from "../../utils/types";
 import styles from "./Shop.module.css";
+import { useEffect, useState } from "react";
+import Card from "../../components/product-card/ProductCard";
+import type { ProductItem } from "../../utils/types";
 
 export default function Shop() {
   const { productItems, shopError, shopLoading } = useFakeStore();
 
   return (
-    <>
-      <h2>Shop Page</h2>
-      {shopLoading && <span>Loading...</span>}
-      {shopError && <span>{shopError.message}</span>}
+    <section className={styles.shop}>
+      <header className={styles.header}>
+        <h2>Shop Page</h2>
+      </header>
+      {shopLoading && <header>Loading...</header>}
+      {shopError && <header>{shopError.message}</header>}
       <div className={styles.cardContainer}>
         {productItems.map((productItem) => (
           <Card key={productItem.id} productItem={productItem} />
         ))}
       </div>
-    </>
+    </section>
   );
 }
 

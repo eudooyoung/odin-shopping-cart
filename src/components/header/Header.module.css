@@ -1,0 +1,11 @@
+.header {
+  background-color: var(--banner-background-color);
+
+  display: grid;
+  align-content: center;
+}
+
+h1 {
+  color: var(--banner-text-color);
+  font-weight: var(--banner-font-weight);
+}

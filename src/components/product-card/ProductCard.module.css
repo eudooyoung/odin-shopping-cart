@@ -1,0 +1,72 @@
+.card {
+  box-shadow: var(--product-card-shadow);
+  border-radius: var(--product-card-radius);
+  padding: var(--product-card-padding);
+
+  display: grid;
+  justify-items: center;
+  grid-template-rows: 200px repeat(3, auto);
+  gap: 0.5rem;
+}
+
+.h3 {
+  max-width: 100%;
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.img {
+  padding: 1rem;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.input {
+  width: 3rem;
+}
+
+.button {
+  border: none;
+  background: inherit;
+}
+
+.icon {
+  display: block;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.visuallyHidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+/* transition */
+.card {
+  transition-property: background-color;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-in;
+}
+
+.card:hover {
+  background-color: var(--product-card-background-hovered);
+  transition-property: background-color;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-in;
+}

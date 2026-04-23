@@ -1,0 +1,115 @@
+.order {
+  box-shadow: var(--order-card-shadow);
+  border-radius: var(--order-card-radius);
+  padding: var(--order-card-padding-wide);
+
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  grid-template-rows: repeat(3, calc(200px / 3));
+  grid-template-areas:
+    "img title"
+    "img form"
+    "img sub-total";
+  align-items: center;
+  justify-items: center;
+}
+
+.img {
+  grid-area: img;
+  justify-self: center;
+
+  padding-right: 1rem;
+  max-width: 130px;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.h3 {
+  grid-area: title;
+
+  max-width: 100%;
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.form {
+  grid-area: form;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.buttonContainer {
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 2rem;
+}
+
+.button {
+  border: none;
+  background-color: inherit;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.icon {
+  display: block;
+}
+
+.visuallyHidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.subTotal {
+  grid-area: sub-total;
+
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* transition */
+.order {
+  transition-property: background-color;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-out;
+}
+
+.order:hover {
+  transition-property: background-color;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-in;
+  background-color: var(--order-card-background-hovered);
+}
+
+@media (max-width: 800px) {
+  .order {
+    padding: var(--order-card-padding-narrow);
+    grid-template-columns: auto;
+    grid-template-rows: 150px repeat(3, auto);
+    grid-template-areas:
+      "img"
+      "title"
+      "form"
+      "sub-total";
+    gap: 0.5rem;
+  }
+
+  .img {
+    padding-right: 0;
+  }
+}

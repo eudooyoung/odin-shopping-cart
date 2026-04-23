@@ -4,7 +4,6 @@ type ProductItem = {
   id: number;
   title: string;
   price: number;
-  description: string;
   category: string;
   image: string;
 };
@@ -17,7 +16,7 @@ type CartItem = {
   quantity: number;
 };
 
-type Card = {
+type ProductCard = {
   productItem: ProductItem;
 };
 
@@ -30,4 +29,4 @@ type MainContext = [
   Dispatch<SetStateAction<Map<number, CartItem>>>,
 ];
 
-export type { ProductItem, CartItem, Card, MainContext, Order };
+export type { ProductItem, CartItem, ProductCard, MainContext, Order };

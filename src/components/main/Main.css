@@ -1,0 +1,12 @@
+main {
+  display: grid;
+  grid-template-rows: 2rem auto;
+}
+
+h2 {
+  font-weight: var(--main-heading-weight);
+}
+
+h3 {
+  font-weight: var(--main-sub-heading-weight);
+}

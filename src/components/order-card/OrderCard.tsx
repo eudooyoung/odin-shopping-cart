@@ -48,29 +48,31 @@ export default function Order({ cartItem }: Order) {
       <h3 className={styles.h3}>{cartItem.title}</h3>
       <form className={styles.form} action="post">
         <label htmlFor="quantity">Quantity: </label>
-        <button onClick={handleDecrease} className={styles.button}>
-          <Icon className={styles.icon} path={mdiMinusBox} size={1} />
-          <span className={styles.visuallyHidden}>Minus one</span>
-        </button>
-        <input
-          type="text"
-          id="quantity"
-          itemType="number"
-          value={cartItem.quantity}
-          readOnly={true}
-          className={styles.input}
-        />
-        <button onClick={handleIncrease} className={styles.button}>
-          <Icon className={styles.icon} path={mdiPlusBox} size={1} />
-          <span className={styles.visuallyHidden}>Plus one</span>
-        </button>
-        <button onClick={handleDelete} className={styles.button}>
-          <Icon className={styles.icon} path={mdiTrashCan} size={1} />
-          <span className={styles.visuallyHidden}>Remove item</span>
-        </button>
+        <div className={styles.buttonContainer}>
+          <button onClick={handleDecrease} className={styles.button}>
+            <Icon className={styles.icon} path={mdiMinusBox} size={1} />
+            <span className={styles.visuallyHidden}>Minus one</span>
+          </button>
+          <input
+            type="text"
+            id="quantity"
+            itemType="number"
+            value={cartItem.quantity}
+            readOnly={true}
+            className={styles.input}
+          />
+          <button onClick={handleIncrease} className={styles.button}>
+            <Icon className={styles.icon} path={mdiPlusBox} size={1} />
+            <span className={styles.visuallyHidden}>Plus one</span>
+          </button>
+          <button onClick={handleDelete} className={styles.button}>
+            <Icon className={styles.icon} path={mdiTrashCan} size={1} />
+            <span className={styles.visuallyHidden}>Remove item</span>
+          </button>
+        </div>
       </form>
       <span className={styles.subTotal}>
-        Sub Total: $ {cartItem.price * cartItem.quantity}
+        Sub Total: <span>$ {cartItem.price * cartItem.quantity}</span>
       </span>
     </article>
   );

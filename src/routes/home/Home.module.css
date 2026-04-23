@@ -1,16 +1,37 @@
 .home {
   text-align: left;
+  padding: 1rem 0;
+
   display: grid;
-  grid-template-rows: 5em repeat(2, auto);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 5rem;
 }
 
 .home > * {
-  margin: var(--main-content-margin);
-  display: grid;
-  align-items: center;
+  margin: var(--main-content-margin-wide);
 }
 
-p {
+.header,
+.provideSection,
+.aboutSection {
+  display: grid;
+}
+
+.intro,
+.provide,
+.about {
   padding: 0 2rem;
   align-self: start;
+}
+
+@media (max-width: 600px) {
+  .home > * {
+    margin: var(--main-content-margin-medium);
+  }
+}
+
+@media (max-width: 400px) {
+  .home > * {
+    margin: var(--main-content-margin-narrow);
+  }
 }

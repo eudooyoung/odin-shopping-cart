@@ -15,7 +15,12 @@ export default function NavBar({ totalItem }: { totalItem: number }) {
         <span>Shop</span>
       </NavLink>
       <NavLink className={isActiveClass} to="/cart">
-        <span>Cart <span className={styles.totalItem}>{totalItem > 0 && totalItem}</span></span>
+        <span>
+          Cart{" "}
+          {totalItem > 0 && (
+            <span className={styles.totalItem}>{totalItem}</span>
+          )}
+        </span>
       </NavLink>
     </nav>
   );

@@ -6,14 +6,36 @@
 }
 
 .cart > * {
-  margin: var(--main-content-margin);
-  display: grid;
+  margin: var(--main-content-margin-wide);
 }
 
 .header {
+  display: grid;
   align-content: center;
 }
 
 .orderContainer {
+  display: grid;
+  grid-template-columns: 75%;
+  justify-content: center;
+  align-content: start;
   gap: 2rem;
+}
+
+@media (max-width: 800px) {
+  .orderContainer {
+    grid-template-columns: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .cart > * {
+    margin: var(--main-content-margin-medium);
+  }
+}
+
+@media (max-width: 400px) {
+  .cart > * {
+    margin: var(--main-content-margin-narrow);
+  }
 }

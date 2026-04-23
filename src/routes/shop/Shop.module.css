@@ -5,7 +5,7 @@
 }
 
 .shop > * {
-  margin: var(--main-content-margin);
+  margin: var(--main-content-margin-wide);
   display: grid;
 }
 
@@ -16,4 +16,16 @@
 .cardContainer {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
+}
+
+@media (max-width: 600px) {
+  .shop > * {
+    margin: var(--main-content-margin-medium);
+  }
+}
+
+@media (max-width: 400px) {
+  .shop > * {
+    margin: var(--main-content-margin-narrow);
+  }
 }

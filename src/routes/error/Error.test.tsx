@@ -1,6 +1,5 @@
 import {
   createMemoryRouter,
-  Route,
   RouterProvider,
   type DataRouter,
 } from "react-router";

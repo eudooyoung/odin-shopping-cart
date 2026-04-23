@@ -1,17 +1,21 @@
-import "./NavBar.css";
+import styles from "./NavBar.module.css";
 import { NavLink } from "react-router";
 
 export default function NavBar({ totalItem }: { totalItem: number }) {
+  const isActiveClass = ({ isActive }: { isActive: boolean }) => {
+    return isActive ? `${styles.link} ${styles.active}` : `${styles.link}`;
+  };
+
   return (
-    <nav>
-      <NavLink to="/">
+    <nav className={styles.nav}>
+      <NavLink className={isActiveClass} to="/">
         <span>Home</span>
       </NavLink>
-      <NavLink to="/shop">
+      <NavLink className={isActiveClass} to="/shop">
         <span>Shop</span>
       </NavLink>
-      <NavLink to="/cart">
-        <span>Cart {totalItem > 0 && totalItem}</span>
+      <NavLink className={isActiveClass} to="/cart">
+        <span>Cart <span className={styles.totalItem}>{totalItem > 0 && totalItem}</span></span>
       </NavLink>
     </nav>
   );

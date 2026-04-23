@@ -2,6 +2,7 @@
   text-align: left;
   display: grid;
   grid-template-rows: 3rem auto;
+  gap: 1rem;
 }
 
 .cart > * {
@@ -14,5 +15,5 @@
 }
 
 .orderContainer {
-  
+  gap: 2rem;
 }

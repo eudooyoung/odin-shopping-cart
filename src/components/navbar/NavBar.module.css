@@ -1,10 +1,10 @@
-nav {
+.nav {
   background-color: var(--navbar-background-color);
 
   display: flex;
 }
 
-a {
+.link {
   flex: 1 1 0;
   color: var(--navbar-text-color);
   text-decoration: none;
@@ -13,22 +13,31 @@ a {
   place-content: center;
 }
 
-a.active {
+.link.active {
   background-color: #fff;
   font-weight: var(--active-link-font-weight);
 }
 
-/* transition */
-a {
-  transition-property: background-color font-weight;
-  transition-duration: 0.2s;
-  transition-timing-function: ease-in-out;
+.totalItem {
+  padding: 0 0.2rem;
+  color: #fff;
+  font-size: 0.8rem;
+  vertical-align: top;
+  background-color: var(--navbar-text-color);
+  border-radius: 3px;
 }
 
-a:hover {
+/* transition */
+.link {
   transition-property: background-color font-weight;
-  transition-duration: 0.2s;
-  transition-timing-function: ease-in-out;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-out;
+}
+
+.link:hover {
+  transition-property: background-color font-weight;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-in;
   background-color: #fff;
   font-weight: var(--active-link-font-weight);
 }

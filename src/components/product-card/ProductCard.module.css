@@ -1,12 +1,12 @@
 .card {
-  box-shadow: var(--card-shadow);
-  border-radius: 5px;
-  padding: 1rem;
+  box-shadow: var(--product-card-shadow);
+  border-radius: var(--product-card-radius);
+  padding: var(--product-card-padding);
 
   display: grid;
   justify-items: center;
   grid-template-rows: 200px repeat(3, auto);
-  gap: 0.2rem;
+  gap: 0.5rem;
 }
 
 .h3 {
@@ -18,8 +18,9 @@
 }
 
 .img {
-  width: 100%;
-  height: 100%;
+  padding: 1rem;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
 }
 
@@ -36,6 +37,10 @@
 .button {
   border: none;
   background: inherit;
+}
+
+.icon {
+  display: block;
 }
 
 .button:hover {
@@ -60,7 +65,7 @@
 }
 
 .card:hover {
-  background-color: var(--card-background-hovered);
+  background-color: var(--product-card-background-hovered);
   transition-property: background-color;
   transition-duration: 0.1s;
   transition-timing-function: ease-in;

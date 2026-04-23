@@ -1,7 +1,7 @@
 import styles from "./Cart.module.css";
 import { useOutletContext } from "react-router";
 import type { MainContext } from "../../utils/types";
-import Order from "../../components/order/Order";
+import Order from "../../components/order-card/OrderCard";
 
 export default function Cart() {
   const [cartItems, _] = useOutletContext<MainContext>();

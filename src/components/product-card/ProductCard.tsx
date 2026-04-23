@@ -78,15 +78,15 @@ export default function ProductCard({ productItem }: ProductCard) {
           onChange={inputHandle}
         />
         <button className={styles.button} onClick={handleIncrease}>
-          <Icon path={mdiPlusBox} size={1} />
+          <Icon className={styles.icon} path={mdiPlusBox} size={1} />
           <span className={styles.visuallyHidden}>Plus one</span>
         </button>
         <button className={styles.button} onClick={handleDecrease}>
-          <Icon path={mdiMinusBox} size={1} />
+          <Icon className={styles.icon} path={mdiMinusBox} size={1} />
           <span className={styles.visuallyHidden}>Minus one</span>
         </button>
         <button className={styles.button} onClick={onAddToCart}>
-          <Icon path={mdiCartPlus} size={1} />
+          <Icon className={styles.icon} path={mdiCartPlus} size={1} />
           <span className={styles.visuallyHidden}>Add to cart</span>
         </button>
       </form>

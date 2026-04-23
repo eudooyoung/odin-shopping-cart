@@ -39,18 +39,18 @@ describe("Order Component", () => {
     const linkToCartPage = screen.getByRole("link", { name: /cart/i });
     await user.click(linkToCartPage);
 
-    const increaseOrderBtn = screen.getByRole("button", { name: "+" });
+    const increaseOrderBtn = screen.getByRole("button", { name: /plus/i });
     await user.click(increaseOrderBtn);
     const orderQuantity = screen.getByLabelText(/quantity/i);
     expect(orderQuantity).toHaveValue("2");
 
-    const decreaseOrderBtn = screen.getByRole("button", { name: "-" });
+    const decreaseOrderBtn = screen.getByRole("button", { name: /minus/i });
     await user.click(decreaseOrderBtn);
     expect(orderQuantity).toHaveValue("1");
     await user.click(decreaseOrderBtn);
     expect(orderQuantity).toHaveValue("1");
 
-    const deleteOrderBtn = screen.getByRole("button", { name: "x" });
+    const deleteOrderBtn = screen.getByRole("button", { name: /remove/i });
     await user.click(deleteOrderBtn);
     expect(screen.queryByRole("heading", { name: "productOne" })).toBeNull();
   });

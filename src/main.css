@@ -8,8 +8,14 @@
   --main-heading-weight: 500;
   --main-content-margin: 0 15rem;
   --main-sub-heading-weight: 600;
-  --card-shadow: 1px 1px 3px #b3b3b3;
-  --card-background-hovered: #f6f6f6;
+  --product-card-shadow: 1px 1px 3px #b3b3b3;
+  --product-card-radius: 5px;
+  --product-card-padding: 1rem;
+  --product-card-background-hovered: #f6f6f6;
+  --order-card-shadow: 1px 1px 3px #b3b3b3;
+  --order-card-radius: 15px;
+  --order-card-padding: 2rem;
+  --order-card-background-hovered: #e8f0f0;
 }
 
 *,
